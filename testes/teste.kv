@@ -1,0 +1,46 @@
+#:import PopEspecial pops.PopEspecial
+#:import Factory kivy.factory.Factory
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import ButtonStyle button_style
+
+<Manager>:
+    Menu:
+    Tela1:
+
+
+<Menu>:
+    canvas.before:
+        Color:
+            rgba: get_color_from_hex('474747')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name: 'menu'
+    FloatLayout:
+        ButtonStyle:
+            text: 'Tela1 - aaaaaaaaaaaaaaaaaa'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint: .3, .15
+            background_color: get_color_from_hex('2BD62B')
+            background_normal: ''
+#            background_down: get_color_from_hex('28C528')
+            on_release: Factory.POP1().open()#root.manager.current = 'tela1'
+
+
+
+
+<Tela1>:
+    name: 'tela1'
+    FloatLayout:
+        Button:
+            text: 'voltar'
+            pos_hint: {'right': 1, 'top': 1}
+            size_hint: .2, .15
+            on_release: PopEspecial(main_screen = 'menu', size_hint = (.5, .3), label_content = 'Deseja salvar antes de sair?').open()
+
+<POP1@PopEspecial>:
+    main_screen: 'menu'
+    title: 'Mudar tela'
+    label_content: 'Deseja ir para a tela 1?'
+#    on_left_button: root.salvar()
+
