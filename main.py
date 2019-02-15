@@ -103,7 +103,7 @@ class Basico(Screen):
         return True
 
     def sortear(self):
-        pop = PopSortear(self)
+        pop = PopSortear(self, "basico")
         pop.open()
 
 

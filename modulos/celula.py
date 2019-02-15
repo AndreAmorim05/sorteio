@@ -2,7 +2,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import dp
 from kivy.properties import NumericProperty, StringProperty
-from change_popup import ChPopup
+from modulos.change_popup import ChPopup
 
 
 class Celula(BoxLayout):
