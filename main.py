@@ -4,9 +4,9 @@ from kivy.core.window import Window
 from kivy.properties import ListProperty
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
-from pops import PopSortear
-from celula import *
-from retorno_unico import *
+from layouts.pops import PopSortear
+from modulos.celula import *
+from layouts.retorno_unico import *
 import json
 
 Config.set('graphics', 'height', 700)

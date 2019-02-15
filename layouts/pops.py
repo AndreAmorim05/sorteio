@@ -4,7 +4,7 @@ from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from sorteio import basico, retorno_unico
+from modulos.sorteio import basico, retorno_unico
 
 
 class PopEspecial(Popup):
