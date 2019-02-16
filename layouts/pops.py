@@ -4,7 +4,7 @@ from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from modulos.sorteio import basico, retorno_unico
+from modulos.sorteio import basico, retorno_unico, retorno_duplo
 
 
 class PopEspecial(Popup):
@@ -53,12 +53,15 @@ class PopSortear(Popup):
         self.box = BoxLayout(orientation='vertical')
         self.botoes = BoxLayout()
         self.lab = Label(text=self.lab_content)
+        self.tela = tela
 
         self.botao1 = Button(text='Sim')
         if tela == 'basico':
             self.botao1.bind(on_release=self.preparando)
         elif tela == 'Retorno Unico':
             self.botao1.bind(on_release=self.sorteio_unico)
+        elif tela == 'Retorno Duplo':
+             self.botao1.bind(on_release=self.preparando)
         self.botao2 = Button(text='Não')
         self.botao2.bind(on_release=self.sem_salvar)
 
@@ -77,19 +80,35 @@ class PopSortear(Popup):
         lista_completa = []
         lista2 = []
         lista1 = []
-        for widget in self.instancia.ids.box1.walk():
-            # if type(widget) != type():
-            try:
-                if widget.text != 'X' and widget.text != 'Sortear':
-                    lista_completa.append(widget.text)
-            except:
-                pass
-        for widget in self.instancia.ids.box2.walk():
-            try:
-                if widget.text != 'X' and widget.text != 'Sortear':
-                    lista2.append(widget.text)
-            except:
-                pass
+        if self.tela == 'basico':
+            for widget in self.instancia.ids.box1.walk():
+                # if type(widget) != type():
+                try:
+                    if widget.text != 'X' and widget.text != 'Sortear':
+                        lista_completa.append(widget.text)
+                except:
+                    pass
+            for widget in self.instancia.ids.box2.walk():
+                try:
+                    if widget.text != 'X' and widget.text != 'Sortear':
+                        lista2.append(widget.text)
+                except:
+                    pass
+        else:
+            for widget in self.instancia.ids.sroll_duplo1.walk():
+                # if type(widget) != type():
+                try:
+                    if widget.text != 'X' and widget.text != 'Sortear':
+                        lista_completa.append(widget.text)
+                except:
+                    pass
+            for widget in self.instancia.ids.scroll_duplo2.walk():
+                try:
+                    if widget.text != 'X' and widget.text != 'Sortear':
+                        lista2.append(widget.text)
+                except:
+                    pass
+
 
         for i in lista_completa:
             if i not in lista2:
@@ -102,13 +121,19 @@ class PopSortear(Popup):
                 lista1.append('---')
 
         # print(lista1, '\n', lista2)
+        if self.tela == 'basico':
+            result = basico(lista1, lista2)
+            pop_result = PopResult(result, 'basico')
+            pop_result.open()
 
-        result = basico(lista1, lista2)
+            self.dismiss()
+        else:
+            result = retorno_duplo(lista1, lista2)
         # print(result)
-        pop_result = PopResult(result, 'basico')
-        pop_result.open()
+            pop_result = PopResult(result, 'Retorno Duplo')
+            pop_result.open()
 
-        self.dismiss()
+            self.dismiss()
 
     def sorteio_unico(self, *args):
         lista = []
@@ -154,3 +179,7 @@ class PopResult(Popup):
 
         elif self.tipo == 'Retorno Unico':
             self.lab.text = dados
+
+        elif self.tipo == 'Retorno Duplo':
+            resultado = f'{dados[0]:<7}' + '   <--->   '.format(end='') + f'{dados[1]:<7}'
+            self.lab.text = resultado

@@ -7,14 +7,16 @@
 #:set L1 []
 #:set L2 []
 
+
 <Manager>:
 #    telas iniciais
-    TelaInicial:
+    # TelaInicial:
     Tipos:
     Historico:
 #    telas relacionadas a sorteios
     Basico:
     RetornoUnico:
+    RetornoDuplo:
 
 
 
@@ -221,7 +223,7 @@
                     multiline: False
                     on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
                 Button:
-                    id: botao1
+                    # id: botao1
                     size_hint: .2, 1
                     on_release: ficha_unico.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_unico.text); ficha_unico.text = ''
 
@@ -240,6 +242,72 @@
                 source_image: 'data/reload.png'
                 # todo: Popups só são inicializados assim! Factory.PopSalvar().open()
 
+<RetornoDuplo>:
+    name: 'Retorno Duplo'
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: get_color_from_hex('474747')
+            RoundedRectangle:
+                radius: 5,5,5,5
+                size: self.size
+                pos: self.pos
+        Button:
+            size_hint: .1,.1
+            pos_hint: {'top': 1, 'right': 1}
+            text: 'Voltar'
+            on_release: Factory.PopSair().open()
+        BoxLayout:
+            size_hint: .6, .7
+            spacing: dp(10)
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            BoxLayout:
+                padding: dp(7)
+                size_hint_y: None
+                height: dp(50)
+                TextInput:
+                    id: ficha_duplo1
+                    hint_text: 'Adicione uma ficha'
+                    multiline: False
+                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+                Button:
+                    # id: botao1
+                    size_hint: .2, 1
+                    on_release: ficha_duplo1.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_duplo1.text); ficha_duplo1.text = ''
+            BoxLayout:
+                padding: dp(7)
+                size_hint_y: None
+                height: dp(50)
+                TextInput:
+                    id: ficha_duplo2
+                    hint_text: 'Adicione uma ficha'
+                    multiline: False
+                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar2(self.text); self.text = ''
+                Button:
+                    size_hint: .2, 1
+                    on_release: ficha_duplo2.hint_text = 'Adicione outra ficha'; root.adicionar2(ficha_duplo2.text); ficha_duplo2.text = ''
+
+            BoxLayout:
+                ScrollView:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        id: sroll_duplo1
+                        size_hint_y: None
+                        height: self.minimum_height
+                ScrollView:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        id: scroll_duplo2
+                        size_hint_y: None
+                        height: self.minimum_height
+
+            ButtonStyle:
+                size_hint: .2, .2
+                text: 'Sortear'
+                on_release: root.sortear()
+                source_image: 'data/reload.png'
+                # todo: Popups só são inicializados assim! Factory.PopSalvar().open()
 
 
 <Botao@ButtonBehavior+Label>:
