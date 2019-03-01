@@ -32,4 +32,6 @@ class ButtonStyle(ButtonBehavior, Label):
                   source=self.source_image,
                   size=(self.height * 0.4, self.height * 0.4))
 
+    def load_image(self):
+        pass
 # cor do ícone do botão F5F6F2
