@@ -1,7 +1,0 @@
-''' por algum motivo o trecho de código abaixo está se apagando e causando um 
-    erro no programa, isto está ocorrendo na classe RetornoUnico:
-    
-    def sortear(self):
-        pop = PopSortear(self, 'Retorno Unico')
-        pop.open()
-    '''
