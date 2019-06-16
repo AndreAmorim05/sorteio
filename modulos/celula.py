@@ -9,7 +9,7 @@ class Celula(BoxLayout):
     size_hint_y = NumericProperty(None)
     height = NumericProperty(dp(70))
     text_button = StringProperty('')
-
+    
     # id = 'box'
     def __init__(self, instancia, **kwargs):
         super(Celula, self).__init__(**kwargs)
@@ -32,8 +32,3 @@ class Celula(BoxLayout):
     def delete_wid(self, *args):
         self.remove_widget(self.botoes)
         self.height = 0
-
-
-# class CellButton(Button):
-#     def __init__(self, **kwargs):
-#         super(CellButton, self).__init__(**kwargs)
