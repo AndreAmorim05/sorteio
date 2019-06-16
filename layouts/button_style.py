@@ -27,11 +27,15 @@ class ButtonStyle(ButtonBehavior, Label):
 
     def on_size(self, *args):
         self.atualizar()
+    
+    def on_state(self, *args):
+        self.atualizar()
 
     def atualizar(self, *args):
         self.canvas.before.clear()
         with self.canvas.before:
-            Color(rgba=(get_color_from_hex('2BD62B')))
+            # trocar cor não funcionou
+            Color(rgba=((get_color_from_hex('2BD62B') if self.state == 'normal' else get_color_from_hex('219321'))))
             Ellipse(size=(self.height, self.height),
                     pos=self.pos)
             Ellipse(size=(self.height, self.height),
