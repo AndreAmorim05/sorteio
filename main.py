@@ -7,9 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from layouts.pops import PopSortear
 from modulos.celula import *
 from layouts.retorno_unico import *
-# from kivy.utils import platform
-# from os import sep
-# import json
+import json
 
 Config.set('graphics', 'height', 700)
 Config.set('graphics', 'width', 500)
@@ -64,8 +62,8 @@ class Tipos(Screen):
             App.get_running_app().root.current = 'basico'
         elif tela == 'Retorno Unico':
             App.get_running_app().root.current = 'Retorno Unico'
-        elif tela == 'Retorno Duplo':
-            App.get_running_app().root.current = 'Retorno Duplo'
+        # elif tela == 'Retorno Duplo':
+        #     App.get_running_app().root.current = 'Retorno Duplo'
         # elif tela == 'Inteiro Positivo':
         #     App.get_running_app().root.current = 'Inteiro Positivo'
 
@@ -139,54 +137,10 @@ class RetornoUnico(Screen):
         except:
             print('Não foi possível adicionar uma nova célula')
 
-    def sortear(self):
-        pop = PopSortear(self, 'Retorno Unico')
-        pop.open()
+
 
 class RetornoDuplo(Screen):
-        lista1 = ListProperty([])
-        lista2 = ListProperty([])
-
-        def __init__(self, **kwargs):
-            super(RetornoDuplo, self).__init__(**kwargs)
-
-
-        def on_pre_enter(self, *args):
-            Window.bind(on_keyboard=self.voltar)
-
-        def voltar(self, window, key, *args):
-            if key == 27: # 27 corresponde ao código da tecla Esc
-                PopSair().open()
-    # importante, pois sem este return abrem-se os dois popups, de encerrar e de voltar
-                return True
-
-        def sem_salvar(self):
-            App.get_running_app().root.current = 'telaincial'
-            return True
-
-        def sortear(self):
-            pop = PopSortear(self, "Retorno Duplo")
-            pop.open()
-
-
-        def on_pre_leave(self, *args):
-            Window.unbind(on_keyboard=self.voltar)
-
-        def adicionar(self, texto):
-            try:
-                if texto != '':
-                    self.lista1.append(texto)
-                    self.ids.sroll_duplo1.add_widget(Celula(self, text_button=texto))
-            except:
-                print('Não foi possível adicionar uma nova célula')
-
-        def adicionar2(self, texto):
-            try:
-                if texto != '':
-                    self.lista2.append(texto)
-                    self.ids.scroll_duplo2.add_widget(Celula(self, text_button=texto))
-            except:
-                print('Não foi possível adicionar uma nova célula')
+    pass
 
 class IntPositivo(Screen):
     pass
