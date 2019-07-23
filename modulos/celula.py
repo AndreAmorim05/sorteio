@@ -30,5 +30,4 @@ class Celula(BoxLayout):
 
 
     def delete_wid(self, *args):
-        self.remove_widget(self.botoes)
-        self.height = 0
+        self.parent.remove_widget(self)
