@@ -1,0 +1,66 @@
+
+<retorno_basico>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: get_color_from_hex('474747')
+            RoundedRectangle:
+                radius: 5,5,5,5
+                size: self.size
+                pos: self.pos
+        Button:
+            size_hint: .1,.1
+            pos_hint: {'top': 1, 'right': 1}
+            text: 'Voltar'
+            on_release: Factory.PopSair().open()
+        BoxLayout:
+            size_hint: .6, .7
+            spacing: dp(10)
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            BoxLayout:
+                padding: dp(7)
+                size_hint_y: None
+                height: dp(50)
+                TextInput:
+                    id: ficha1
+                    hint_text: 'Adicione uma ficha'
+                    multiline: False
+                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+                Button:
+                    id: botao1
+                    size_hint: .2, 1
+                    on_release: ficha1.hint_text = 'Adicione outra ficha'; root.adicionar(ficha1.text); ficha1.text = ''
+            BoxLayout:
+                padding: dp(7)
+                size_hint_y: None
+                height: dp(50)
+                TextInput:
+                    id: ficha2
+                    hint_text: 'Adicione uma ficha'
+                    multiline: False
+                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar2(self.text); self.text = ''
+                Button:
+                    size_hint: .2, 1
+                    on_release: ficha2.hint_text = 'Adicione outra ficha'; root.adicionar2(ficha2.text); ficha2.text = ''
+
+            BoxLayout:
+                ScrollView:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        id: box1
+                        size_hint_y: None
+                        height: self.minimum_height
+                ScrollView:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        id: box2
+                        size_hint_y: None
+                        height: self.minimum_height
+
+            ButtonStyle:
+                size_hint: .2, .2
+                text: 'Sortear'
+                on_release: root.sortear()
+                source_image: 'data/reload_alterado.png'
+                # todo: Popups só são inicializados assim! Factory.PopSalvar().open()

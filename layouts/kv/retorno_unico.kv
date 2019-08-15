@@ -1,0 +1,49 @@
+<retorno_unico>:
+    Button:
+        text: 'click'
+    # FloatLayout:
+    #     canvas.before:
+    #         Color:
+    #             rgba: get_color_from_hex('474747')
+    #         RoundedRectangle:
+    #             radius: 5,5,5,5
+    #             size: self.size
+    #             pos: self.pos
+    #     Button:
+    #         size_hint: .1,.1
+    #         pos_hint: {'top': 1, 'right': 1}
+    #         text: 'Voltar'
+    #         on_release: Factory.PopSair().open()
+    #     BoxLayout:
+    #         size_hint: .6, .7
+    #         spacing: dp(10)
+    #         orientation: 'vertical'
+    #         pos_hint: {'center_x': .5, 'center_y': .45}
+    #         BoxLayout:
+    #             padding: dp(7)
+    #             size_hint_y: None
+    #             height: dp(50)
+    #             TextInput:
+    #                 id: ficha_unico
+    #                 hint_text: 'Adicione uma ficha'
+    #                 multiline: False
+    #                 on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+    #             Button:
+    #                 # id: botao1
+    #                 size_hint: .2, 1
+    #                 on_release: ficha_unico.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_unico.text); ficha_unico.text = ''
+
+    #         BoxLayout:
+    #             ScrollView:
+    #                 BoxLayout:
+    #                     orientation: 'vertical'
+    #                     id: scroll_unico
+    #                     size_hint_y: None
+    #                     height: self.minimum_height
+
+    #         ButtonStyle:
+    #             size_hint: .2, .2
+    #             text: 'Sortear'
+    #             on_release: root.sortear()
+    #             source_image: 'data/reload_alterado.png'
+    #             # todo: Popups só são inicializados assim! Factory.PopSalvar().open()
