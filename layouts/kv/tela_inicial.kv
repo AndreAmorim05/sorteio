@@ -1,0 +1,35 @@
+<TelaInicial>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: get_color_from_hex('474747')
+            RoundedRectangle:
+                radius: 5,5,5,5
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            size_hint: .4, .7
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            orientation: 'vertical'
+            spacing: dp(20)
+            padding: dp(10)
+            ButtonStyle:
+                text: 'Novo Sorteio'
+                bold: True
+                font_size: dp(17)
+                on_release: root.manager.current = 'tipos'
+                source_image: 'data/edit_alterado.png'
+
+            ButtonStyle:
+                bold: True
+                text: 'Historico'
+                font_size: dp(17)
+                on_release: root.manager.current = 'historico'
+                source_image: 'data/book_alterado.png'
+
+            ButtonStyle:
+                bold: True
+                text: 'Sair'
+                font_size: dp(17)
+                source_image: 'data/cancel_alterado.png'
+                on_release: root.confirmacao()

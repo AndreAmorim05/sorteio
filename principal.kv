@@ -4,6 +4,10 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import ButtonStyle layouts.button_style.ButtonStyle
 
+#:include kv/retorno_basico
+#:include kv/retorno_unico
+
+
 #:set L1 []
 #:set L2 []
 
@@ -15,7 +19,10 @@
     Historico:
 #    telas relacionadas a sorteios
     Basico:
+        name: 'basico'
     RetornoUnico:
+        name: 'Retorno Unico'
+
     RetornoDuplo:
 
 
@@ -126,13 +133,7 @@
             pos_hint: {'top': 1, 'right': 1}
             text: 'Voltar'
             on_release: root.manager.current = 'telaincial'
-<Basico>:
-    name: 'basico'
-    retorno_basico:
 
-<RetornoUnico>:
-    name: 'Retorno Unico'
-    retorno_unico:
 
 <RetornoDuplo>:
     name: 'Retorno Duplo'

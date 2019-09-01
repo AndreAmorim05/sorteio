@@ -7,19 +7,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from layouts.pops import PopSortear
 from modulos.celula import *
 from layouts.retorno_unico import *
-from kivy.lang import Builder
-import os
 # from kivy.utils import platform
 # from os import sep
 # import json
 
 Config.set('graphics', 'height', 700)
 Config.set('graphics', 'width', 500)
-
-Builder.load_file('layouts/kv/retorno_basico.kv')
-Builder.load_file('layouts/kv/retorno_unico.kv')
-# Builder.load_file('layouts/kv/retorno_basico.kv')
-# print(os.path(dirname(__file__))
 
 class PopSair(Popup):
     def salvar(self):
@@ -96,7 +89,6 @@ class Basico(Screen):
 
     def __init__(self, **kwargs):
         super(Basico, self).__init__(**kwargs)
-
 
 
     def on_pre_enter(self, *args):
