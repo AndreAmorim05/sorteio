@@ -1,0 +1,52 @@
+<Tipos>:
+    FloatLayout:
+        GridLayout:
+            id: box
+            size_hint: .3, .3
+            pos_hint: {'right': 1, 'center_y': .5}
+            orientation: 'vertical'
+            cols: 2
+            Label:
+                text_size: self.size
+                valign: 'middle'
+                halign: 'left'
+                text: 'Basico' #tentar adicionar o acento sem erros
+            CheckBox:
+                name: 'Basico'
+                group: 'grupo'
+            Label:
+                text_size: self.size
+                valign: 'middle'
+                halign: 'left'
+                text: 'Retorno Unico'
+            CheckBox:
+                name: 'Retorno Unico'
+                group: 'grupo'
+            Label:
+                text_size: self.size
+                valign: 'middle'
+                halign: 'left'
+                text: 'Retorno Duplo'
+            CheckBox:
+                name: 'Retorno Duplo'
+                group: 'grupo'
+            Label:
+                text_size: self.size
+                valign: 'middle'
+                halign: 'left'
+                text: 'Inteiro Positivo'
+            CheckBox:
+                name: 'Inteiro Positivo'
+                group: 'grupo'
+#            CheckBox:
+#                text: '5'
+#                name: '---'
+#                group: 'grupo'
+#            CheckBox:
+#                text: '6'
+#                group: 'grupo'
+        Button:
+            text: 'Selecionar'
+            size_hint: .15, .1
+            pos_hint: {'right': 1, 'botton': 1}
+            on_release: root.get_tipo()

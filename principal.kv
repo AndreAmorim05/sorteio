@@ -4,8 +4,12 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import ButtonStyle layouts.button_style.ButtonStyle
 
-#:include kv/retorno_basico
-#:include kv/retorno_unico
+#:include layouts/kv/tela_inicial.kv
+#:include layouts/kv/tipos.kv
+#:include layouts/kv/historico.kv
+#:include layouts/kv/retorno_basico.kv
+#:include layouts/kv/retorno_unico.kv
+#:include layouts/kv/retorno_duplo.kv
 
 
 #:set L1 []
@@ -15,8 +19,11 @@
 <Manager>:
 #    telas iniciais
     TelaInicial:
+        name: 'telaincial'
     Tipos:
+        name: 'tipos'
     Historico:
+        name: 'historico'
 #    telas relacionadas a sorteios
     Basico:
         name: 'basico'
@@ -24,183 +31,13 @@
         name: 'Retorno Unico'
 
     RetornoDuplo:
+        name: 'Retorno Duplo'
 
 
 
-<TelaInicial>:
-    name: 'telaincial'
-    FloatLayout:
-        canvas.before:
-            Color:
-                rgba: get_color_from_hex('474747')
-            RoundedRectangle:
-                radius: 5,5,5,5
-                size: self.size
-                pos: self.pos
-        BoxLayout:
-            size_hint: .4, .7
-            pos_hint: {'center_x': .5, 'center_y': .4}
-            orientation: 'vertical'
-            spacing: dp(20)
-            padding: dp(10)
-            ButtonStyle:
-                text: 'Novo Sorteio'
-                bold: True
-                font_size: dp(17)
-                on_release: root.manager.current = 'tipos'
-                source_image: 'data/edit_alterado.png'
-
-            ButtonStyle:
-                bold: True
-                text: 'Historico'
-                font_size: dp(17)
-                on_release: root.manager.current = 'historico'
-                source_image: 'data/book_alterado.png'
-
-            ButtonStyle:
-                bold: True
-                text: 'Sair'
-                font_size: dp(17)
-                source_image: 'data/cancel_alterado.png'
-                on_release: root.confirmacao()
-
-<Tipos>:
-    name: 'tipos'
-    FloatLayout:
-        GridLayout:
-            id: box
-            size_hint: .3, .3
-            pos_hint: {'right': 1, 'center_y': .5}
-            orientation: 'vertical'
-            cols: 2
-            Label:
-                text_size: self.size
-                valign: 'middle'
-                halign: 'left'
-                text: 'Basico' #tentar adicionar o acento sem erros
-            CheckBox:
-                name: 'Basico'
-                group: 'grupo'
-            Label:
-                text_size: self.size
-                valign: 'middle'
-                halign: 'left'
-                text: 'Retorno Unico'
-            CheckBox:
-                name: 'Retorno Unico'
-                group: 'grupo'
-            Label:
-                text_size: self.size
-                valign: 'middle'
-                halign: 'left'
-                text: 'Retorno Duplo'
-            CheckBox:
-                name: 'Retorno Duplo'
-                group: 'grupo'
-            Label:
-                text_size: self.size
-                valign: 'middle'
-                halign: 'left'
-                text: 'Inteiro Positivo'
-            CheckBox:
-                name: 'Inteiro Positivo'
-                group: 'grupo'
-#            CheckBox:
-#                text: '5'
-#                name: '---'
-#                group: 'grupo'
-#            CheckBox:
-#                text: '6'
-#                group: 'grupo'
-        Button:
-            text: 'Selecionar'
-            size_hint: .15, .1
-            pos_hint: {'right': 1, 'botton': 1}
-            on_release: root.get_tipo()
-
-<Historico>:
-    name: 'historico'
-    FloatLayout:
-        canvas.before:
-            Color:
-                rgba: get_color_from_hex('474747')
-            RoundedRectangle:
-                radius: 5,5,5,5
-                size: self.size
-                pos: self.pos
-        Button:
-            size_hint: .1,.1
-            pos_hint: {'top': 1, 'right': 1}
-            text: 'Voltar'
-            on_release: root.manager.current = 'telaincial'
 
 
-<RetornoDuplo>:
-    name: 'Retorno Duplo'
-    FloatLayout:
-        canvas.before:
-            Color:
-                rgba: get_color_from_hex('474747')
-            RoundedRectangle:
-                radius: 5,5,5,5
-                size: self.size
-                pos: self.pos
-        Button:
-            size_hint: .1,.1
-            pos_hint: {'top': 1, 'right': 1}
-            text: 'Voltar'
-            on_release: Factory.PopSair().open()
-        BoxLayout:
-            size_hint: .6, .7
-            spacing: dp(10)
-            orientation: 'vertical'
-            pos_hint: {'center_x': .5, 'center_y': .45}
-            BoxLayout:
-                padding: dp(7)
-                size_hint_y: None
-                height: dp(50)
-                TextInput:
-                    id: ficha_duplo1
-                    hint_text: 'Adicione uma ficha'
-                    multiline: False
-                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
-                Button:
-                    # id: botao1
-                    size_hint: .2, 1
-                    on_release: ficha_duplo1.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_duplo1.text); ficha_duplo1.text = ''
-            BoxLayout:
-                padding: dp(7)
-                size_hint_y: None
-                height: dp(50)
-                TextInput:
-                    id: ficha_duplo2
-                    hint_text: 'Adicione uma ficha'
-                    multiline: False
-                    on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar2(self.text); self.text = ''
-                Button:
-                    size_hint: .2, 1
-                    on_release: ficha_duplo2.hint_text = 'Adicione outra ficha'; root.adicionar2(ficha_duplo2.text); ficha_duplo2.text = ''
 
-            BoxLayout:
-                ScrollView:
-                    BoxLayout:
-                        orientation: 'vertical'
-                        id: sroll_duplo1
-                        size_hint_y: None
-                        height: self.minimum_height
-                ScrollView:
-                    BoxLayout:
-                        orientation: 'vertical'
-                        id: scroll_duplo2
-                        size_hint_y: None
-                        height: self.minimum_height
-
-            ButtonStyle:
-                size_hint: .2, .2
-                text: 'Sortear'
-                on_release: root.sortear()
-                source_image: 'data/reload_alterado.png'
-                # todo: Popups só são inicializados assim! Factory.PopSalvar().open()
 
 
 <Botao@ButtonBehavior+Label>:

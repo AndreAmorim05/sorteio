@@ -1,0 +1,14 @@
+<Historico>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: get_color_from_hex('474747')
+            RoundedRectangle:
+                radius: 5,5,5,5
+                size: self.size
+                pos: self.pos
+        Button:
+            size_hint: .1,.1
+            pos_hint: {'top': 1, 'right': 1}
+            text: 'Voltar'
+            on_release: root.manager.current = 'telaincial'
