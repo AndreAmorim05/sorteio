@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.popup import Popup
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from modulos.sorteio import basico, retorno_unico, retorno_duplo
@@ -43,6 +44,11 @@ class PopEspecial(Popup):
         App.get_running_app().root.current = self.main_screen
 
 class PopSortear(Popup):
+    '''
+        Utilizado para apresentar na tela os resultados obtidos
+        dos sorteios realizados.
+    '''
+
     lab_content = StringProperty('Deseja realizar o sorteio?')
     size_hint = ListProperty([0.5,0.3])
     title = StringProperty('Sair')
@@ -158,28 +164,32 @@ class PopResult(Popup):
         self.tipo = tipo
         self.title = "Resultado"
         self.box = BoxLayout(orientation='vertical')
-        self.lab = Label()
-
-        self.box.add_widget(self.lab)
+        # aqui ao invés de de um Boxlayout poderia adicionar
+        # um ScrollView, se utilizando da ideia self.lab.bind(size=self.label.setter(“text_size”))
+        # para se fazer com que possa se realizar o scroll
+        # utilizando o self.minimum_height dos widgets
+        # de forma eficaz aqui pelo arquivo .py
         self.add_widget(self.box)
 
         self.dados(self.resultado)
 
     def dados(self, dados):
         resultado = ''
+        gdl = GridLayout(cols = 3)
         if self.tipo == 'basico':
             for i in range(len(dados)):
-                if i == 0:
-                    '''aqui eu desejo fazer com que a distancia dos valores sorteados sejam a
-                    mesma, imitando uma tabela'''
-                    resultado = f'{dados[i][0]:<7}' + '   <--->   '.format(end='') + f'{dados[i][1]:<7}'
-                else:
-                    resultado = resultado + '\n'.format(end='') + f'{dados[i][0]:<7}' + '   <--->   '.format(end='') + f'{dados[i][1]:<7}'
-            self.lab.text = resultado
+                gdl.add_widget(Label(text=str(dados[i][0])))
+                gdl.add_widget(Label(text='|'))
+                gdl.add_widget(Label(text=str(dados[i][1])))
+
+            self.box.add_widget(gdl)
 
         elif self.tipo == 'Retorno Unico':
-            self.lab.text = dados
+            self.box.add_widget(Label(text=str(dados)))
 
         elif self.tipo == 'Retorno Duplo':
-            resultado = f'{dados[0]:<7}' + '   <--->   '.format(end='') + f'{dados[1]:<7}'
-            self.lab.text = resultado
+            gdl.add_widget(Label(text=str(dados[0])))
+            gdl.add_widget(Label(text='|'))
+            gdl.add_widget(Label(text=str(dados[1])))
+
+            self.box.add_widget(gdl)
