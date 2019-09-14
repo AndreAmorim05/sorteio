@@ -3,6 +3,7 @@ from kivy.uix.popup import Popup
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from modulos.sorteio import basico, retorno_unico, retorno_duplo
@@ -157,18 +158,17 @@ class PopSortear(Popup):
         self.dismiss()
 
 class PopResult(Popup):
+    ''' Apresenta os resultados em forma de tabela ou de Label
+    simples, no caso de sorteios que apresentam grande quantidade
+    de valores, um sistema de scroll é adicionado, exemplo é o
+    sorteio simples'''
     def __init__(self, resultado, tipo, **kwargs):
         super(PopResult, self).__init__(**kwargs)
         self.size_hint = (.7, .5)
         self.resultado = resultado
         self.tipo = tipo
         self.title = "Resultado"
-        self.box = BoxLayout(orientation='vertical')
-        # aqui ao invés de de um Boxlayout poderia adicionar
-        # um ScrollView, se utilizando da ideia self.lab.bind(size=self.label.setter(“text_size”))
-        # para se fazer com que possa se realizar o scroll
-        # utilizando o self.minimum_height dos widgets
-        # de forma eficaz aqui pelo arquivo .py
+        self.box = ScrollView(do_scroll_x=False,do_scroll_y=True)
         self.add_widget(self.box)
 
         self.dados(self.resultado)
@@ -177,10 +177,12 @@ class PopResult(Popup):
         resultado = ''
         gdl = GridLayout(cols = 3)
         if self.tipo == 'basico':
+            gdl.size_hint_y = None
+            gdl.bind(minimum_height=gdl.setter('height'))
             for i in range(len(dados)):
-                gdl.add_widget(Label(text=str(dados[i][0])))
-                gdl.add_widget(Label(text='|'))
-                gdl.add_widget(Label(text=str(dados[i][1])))
+                gdl.add_widget(Label(text=str(dados[i][0]), size_hint_y=None, height=40))
+                gdl.add_widget(Label(text='|',size_hint_y=None, height=40))
+                gdl.add_widget(Label(text=str(dados[i][1]),size_hint_y=None, height=40))
 
             self.box.add_widget(gdl)
 
