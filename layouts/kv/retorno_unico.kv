@@ -28,8 +28,12 @@
                     hint_text: 'Adicione uma ficha'
                     multiline: False
                     on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+                    background_active: 'data/textinput_active.png'
+                    background_normal: 'data/textinput_border_dual.png'
+                    border: 10,10,10,10
                 Button:
                     # id: botao1
+                    text: 'Inserir'
                     size_hint: .2, 1
                     on_release: ficha_unico.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_unico.text); ficha_unico.text = ''
 

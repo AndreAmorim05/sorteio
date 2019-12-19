@@ -27,8 +27,12 @@
                     hint_text: 'Adicione uma ficha'
                     multiline: False
                     on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+                    background_active: 'data/textinput_active.png'
+                    background_normal: 'data/textinput_border_dual.png'
+                    border: 10,10,10,10
                 Button:
                     id: botao1
+                    text: 'Insirerir'
                     size_hint: .2, 1
                     on_release: ficha1.hint_text = 'Adicione outra ficha'; root.adicionar(ficha1.text); ficha1.text = ''
             BoxLayout:
@@ -40,7 +44,11 @@
                     hint_text: 'Adicione uma ficha'
                     multiline: False
                     on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar2(self.text); self.text = ''
+                    background_active: 'data/textinput_active.png'
+                    background_normal: 'data/textinput_border_dual.png'
+                    border: 10,10,10,10
                 Button:
+                    text: 'Insirerir'
                     size_hint: .2, 1
                     on_release: ficha2.hint_text = 'Adicione outra ficha'; root.adicionar2(ficha2.text); ficha2.text = ''
 
