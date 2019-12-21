@@ -34,7 +34,7 @@ class ChPopup(Popup):
 
 
     def fechar(self, *args):
-        print('Deletou')
+        # print('Deletou')
         self.dismiss()
 
     def salvar(self, *args):
