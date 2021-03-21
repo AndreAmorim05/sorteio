@@ -13,7 +13,8 @@
             size_hint: .1,.1
             pos_hint: {'top': 1, 'right': 1}
             text: 'Voltar'
-            on_release: Factory.PopSair().open()
+            # on_release: Factory.PopSair().open()
+            on_release: root.manager.current = 'telaincial'
         BoxLayout:
             size_hint: .6, .7
             spacing: dp(10)
@@ -28,6 +29,7 @@
                     hint_text: 'Adicione uma ficha'
                     multiline: False
                     on_text_validate: self.hint_text = 'Adicione outra ficha'; root.adicionar(self.text); self.text = ''
+                    text_validate_unfocus: False
                     background_active: 'data/textinput_active.png'
                     background_normal: 'data/textinput_border_dual.png'
                     border: 10,10,10,10
@@ -35,7 +37,7 @@
                     # id: botao1
                     text: 'Inserir'
                     size_hint: .2, 1
-                    on_release: ficha_unico.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_unico.text); ficha_unico.text = ''
+                    on_release: ficha_unico.hint_text = 'Adicione outra ficha'; root.adicionar(ficha_unico.text); ficha_unico.text = ''; ficha_unico.focus = True
 
             BoxLayout:
                 ScrollView:
